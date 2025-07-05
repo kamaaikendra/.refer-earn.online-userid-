@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refer & Earn</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghyphenhyphentaINONB7Sy4wj9Pawn8NAxU9Mapewhubm58MKvKj6wmM5RBMwM64hwNAbtpV-sn4LuPtLT86GmLFX94097Wwe7Fmn2kF_5jWO8jkKzha8nSCIYnzwvEY7F3wIxMibUORGS39YZV6vhyphenhyphenaPOwGjmnQyv0UGptO9HYi5NqAe2UMtCT9eLRPnvfQCBv6qY/s16000/1000096137.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border:1px solid green;
+            background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilBBCE0Ee_NIgBZeWSBsF56-O9pmEDAA-mBM7m1xQ4tJBlDKM2Khajkr8nVsVd34o6hdkUXLbtGRsHHFnwU8du0V-iPOCOLh2Yg1P2nq_HNIHgntPcMwx9Att8n-akCifgkOO0XdUd5MWXUm7pNApUfBKReyQy_nMbCMjGAS0JvaCKhNczaRzEW4_IZZE/w640-h202/1000097088.webp');
+            background-size: 100% 100%;
+            filter: drop-shadow(0 0 5px #FFA500) 
+        drop-shadow(0 0 5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .balance-card {
+            background:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYn4N8Oq8JKuOZJFSAHyKs7dTwyr9q_djpo8i3Im5n5P4QsUDuUq7XS0dFBXKMFKhfTLvq6P2kBrSAkXRwHlVobYJ_cIU-Go9OR95hJgBX3p66DTxZwGY0OYa3SSyQ4hwdBv2O0c-H4liu7x1Qx8FQX3TlemCgr74Qyggb8mwZeE0Bi7PJN24VUoUs5Jo/s16000/1000097114.png');
+            background-size: 100% 100%;
+            color: white;
+            border:none;
+            filter: drop-shadow(0 0 5px #FFA500) 
+        drop-shadow(0 0 5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .referral-card {
+            background-color: white;
+        }
+        .history-card {
+            background:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNHjYmqCvDG20dovUHDxBUIc4cd9J_bq_1mAVcjkjD873zqEwfcGRrTKCIN-O0YOrlHjy7OiK9PgVvQiBa-TO6Bzllelwfp_RWFxJYsjVHe0lYPDV1hM03ITzK9hPup8UkqRsrBCLUt8o5MDOiojM67WSet7QdEgJwRFOerP4TPGcXwn3T9NpPOaJf7kU/s16000/1000097092.webp');
+            background-size: 100% 100%;
+            padding-top:35px;
+            border:none;
+            align-content: center;
+            text-align:center;
+        }
+        .btn-primary {
+            background: linear-gradient(180deg, #736AFF, #DC143C);
+            border: none;
+            border-radius: 50px;
+            padding: 5px 10px;
+            font-family: 'Roboto Mono', monospace;
+            filter: drop-shadow(0 0 5px #FFA500) 
+        drop-shadow(0 0 5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            border-radius: 50px;
+            padding: 5px 10px;
+        }
+        .btn-copy {
+            background-color: #f8f9fa;
+            color: #2575fc;
+            border: 1px solid #2575fc;
+            border-radius: 50px;
+            font-family: 'Roboto Mono', monospace;
+        }
+        .referral-code {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 900;
+            color:#FFB2D0;
+        }
+        .referral-head {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 900;
+            color:white;
+        }
+        .app-link {
+            word-break: break-all;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 900;
+            
+        }
+        .badge-success {
+            background-color: #5EFB6E;
+            font-family: 'Roboto Mono', monospace;
+            border:1px solid #FDD017;
+            filter: drop-shadow(0 0 5px #FFA500) 
+        drop-shadow(0 0 5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .badge-warning {
+            background-color: #ffc107;
+            color: #212529;
+            font-family: 'Roboto Mono', monospace;
+        }
+        #withdrawButton {
+            z-index: 1000;
+  /* Positioning */
+  position: absolute;
+  right: 3%;
+  top:2.7%;
+  transform: translate(-50%, -50%);
+  
+  /* Styling */
+  padding: 8px 15px;
+  font-size: 10px;
+  font-weight: 900;
+  color: black;
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  border-left: 1px solid green;
+  border-top:1px solid green;
+  border-right: 1px solid green;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  filter: drop-shadow(0 0 5px #FFA500) 
+        drop-shadow(0 0 5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+}
+
+#withdrawButton:hover {
+  background: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+#withdrawButton:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+#backButton {
+            z-index: 1000;
+  /* Positioning */
+  position: absolute;
+  left: 20%;  /* Changed from right to left */
+  top: 2.7%;
+  transform: translate(-50%, -50%);
+  
+  /* Styling (unchanged) */
+  padding: 8px 15px;
+  font-size: 10px;
+  font-weight: 900;
+  color: black;
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  border-left: 1px solid green;
+  border-top: 1px solid green;
+  border-right: 1px solid green;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#backButton:hover {
+  background: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+#backButton:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+h1 {
+  font-family: 'Arial', sans-serif; /* Or any font you prefer */
+  font-size:30px; /* Adjust size as needed */
+  color: #FED8B1; /* Dark gray color, change as you like */
+  font-weight: 900;
+}
+
+h1 #available-balance {
+  color: #12AD2B; /* Green color for the balance amount */
+  margin-left: 5px; /* Space between ₹ symbol and amount
+}
+
+/* If you want to add some animation when balance changes */
+h1 #available-balance {
+  transition: color 0.3s ease;
+}
+
+h1 #available-balance.updated {
+  color: #FF9800; /* Orange color when balance updates */
+  animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+    </style>
+</head>
+<body>
+     <button id="withdrawButton" onclick="window.location.href='Withdraw.html'">
+  Withdraw
+</button>
+    <div class="container py-4">
+        <!-- Balance Card -->
+        <div class="card balance-card mb-4">
+            <div class="card-body text-center">
+                <style>
+    .refer-earn-heading {
+        color: #F1E5AC;
+        font-family: 'Brush Script MT', cursive, sans-serif;
+        font-size:30px;
+        margin: 10px 0;
+        padding: 5px;
+        font-weight: 900;
+    }
+    .refer-earn-heading i {
+        margin-right: 8px; /* Adjust icon spacing */
+    }
+</style>
+
+<h4 class="refer-earn-heading">
+    <i class="fas fa-users me-2"></i>Refer & Earn
+</h4>
+                <div>
+                    <small class="text-white-50">Available Balance</small>
+                        <h1>₹<span id="available-balance">0</span></h1>
+                    </div>
+                    <div>
+                        <small class="text-white-50">Expected rebates</small>
+                        <small class="text-white-50">Rebate on total upto <span id="total-referral-earnings">0</span>%</small>
+                    </div>
+                <small class="text-white-50">upto ₹<span id="current-balance">0</span> per day</small>
+                <div class="d-flex justify-content-between">
+                </div>
+            </div>
+        </div>
+
+        <!-- Referral Code Card -->
+        <div class="card referral-card mb-4">
+            <div class="card-body">
+                <div class="referral-head"><i class="fas fa-user-friends me-2"></i>My Referral Code</div>
+                <div class="d-flex align-items-center justify-content-between mt-3">
+                    <div class="referral-code" id="user-referral-code">Loading...</div>
+                    <button class="btn btn-copy" id="copy-referral-button">
+                        <i class="fas fa-copy me-1"></i>Copy
+                    </button>
+                </div>
+                <hr>
+                <div class="referral-head"><i class="fas fa-share-alt me-2"></i>My Link</div>
+                <div class="input-group mb-3 mt-2">
+                    <input type="text" class="form-control app-link" id="app-link" readonly 
+                           value="https://apk.e-droid.net/apk/app3585761-irm0z3.apk?v=4">
+                    <button class="btn btn-copy" id="copy-app-button">
+                        <i class="fas fa-copy me-1"></i>Copy
+                    </button>
+                </div>
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-primary" id="share-whatsapp-button">
+                        <i class="fab fa-whatsapp me-1"></i> Share on WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enter Referral Code Section -->
+        <div class="card referral-card mb-4" id="referral-entry-section">
+            <div class="card-body">
+                <h4><i class="fas fa-gift me-2"></i>Enter Invitation Code</h4>
+                <p>Enter your friend's Invitation code to earn ₹25</p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="referral-code-entry" placeholder="Enter 10-digit code" maxlength="10">
+                    <button class="btn btn-success" id="submit-referral-button">Submit</button>
+                </div>
+                <div class="alert alert-danger d-none" id="referral-alert"></div>
+            </div>
+        </div>
+
+        <!-- Referral History -->
+        <div class="card history-card">
+            <div class="card-body">
+                <div class="referral-head"><i class="fas fa-history me-2"></i>Records</div>
+                <div id="referral-activity">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success"><i class="fas fa-check-circle me-2"></i>Success!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-gift text-success mb-3" style="font-size: 3rem;"></i>
+                    <h4>Congratulations!</h4>
+                    <p>You've successfully used a referral code.</p>
+                    <p>₹25 has been added to your balance.</p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Referral Used Modal (for referee) -->
+    <div class="modal fade" id="referralUsedModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-primary"><i class="fas fa-user-plus me-2"></i>New Referral!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-handshake text-primary mb-3" style="font-size: 3rem;"></i>
+                    <h4>Congratulations!</h4>
+                    <p>You have successfully invited a person.</p>
+                    <p>₹25 has been added to your balance.</p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Great!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // ====================== CONFIGURATION ====================== //
+    // Firebase configuration - my Firebase project config
+    const firebaseSettings = {
+        apiKey: "AIzaSyCb-qi3uLhWVRip4eZY_bwq1zkgJjXiT-k",
+        authDomain: "fbase-for-refer-and-earn-page.firebaseapp.com",
+        databaseURL: "https://fbase-for-refer-and-earn-page-default-rtdb.firebaseio.com",
+        projectId: "fbase-for-refer-and-earn-page",
+        storageBucket: "fbase-for-refer-and-earn-page.appspot.com",
+        messagingSenderId: "546476818185",
+        appId: "1:546476818185:web:6154884da5ed6a61459dd8"
+    };
+
+    // App configuration
+    const appSettings = {
+        referralReward: 25, // Amount to give for each successful referral
+        downloadLink: "https://bit.ly/44AUY4v" // Default app link
+    };
+
+    // ====================== INITIALIZATION ====================== //
+    // Initialize Firebase
+    let firebaseReady = false;
+    let firebaseDB;
+    try {
+        firebase.initializeApp(firebaseSettings);
+        firebaseDB = firebase.database();
+        firebaseReady = true;
+        console.log("Firebase initialized successfully");
+    } catch (e) {
+        console.log("Firebase initialization error", e);
+        firebaseReady = false;
+    }
+
+    // Initialize modals
+    const rewardModal = new bootstrap.Modal(document.getElementById('successModal'));
+    const referralRedeemedModal = new bootstrap.Modal(document.getElementById('referralUsedModal'));
+
+    // User data from localStorage
+    let userInfo = JSON.parse(localStorage.getItem('userInfoData')) || {
+        balance: 0,
+        withdrawableBalance: 0,
+        referralEarnings: 0,
+        uirefercode: null,
+        hasUsedReferral: false,
+        referredVia: null,
+        referralHistory: [],
+        earningsFromRefs: []
+    };
+
+    // ====================== UTILITY FUNCTIONS ====================== //
+    // Generate a 10-digit user ID as refercode
+    function createUserReferCode() {
+        return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+    }
+
+    // Format money
+    function formatCurrency(amount) {
+        return amount.toFixed(2);
+    }
+
+    // Show alert
+    function displayAlert(alertElementId, message, isError = true) {
+        const alertBox = document.getElementById(alertElementId);
+        alertBox.textContent = message;
+        alertBox.classList.remove('d-none', 'alert-success', 'alert-danger');
+        alertBox.classList.add(isError ? 'alert-danger' : 'alert-success');
+        setTimeout(() => {
+            alertBox.classList.add('d-none');
+        }, 5000);
+    }
+
+    // Get complete app link with referral code
+    function getAppLinkWithReferral() {
+        return appSettings.downloadLink + (userInfo.uirefercode ? `?ref=${userInfo.uirefercode}` : '');
+    }
+
+    // ====================== FIREBASE FUNCTIONS ====================== //
+    function setupFirebaseSync() {
+        if (!firebaseReady) {
+            console.log("Firebase not initialized, skipping sync");
+            return;
+        }
+
+        // Check if we already have a referral code
+        if (!userInfo.uirefercode) {
+            userInfo.uirefercode = createUserReferCode();
+            localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+        }
+
+        // Set up Firebase reference
+        const userRefPath = firebaseDB.ref('appUsers/' + userInfo.uirefercode);
+
+        // Sync data from Firebase
+        userRefPath.once('value').then((dataSnapshot) => {
+            const remoteData = dataSnapshot.val();
+            
+            if (remoteData) {
+                // Merge Firebase data with local data (giving priority to Firebase for critical fields)
+                userInfo.balance = remoteData.balance || userInfo.balance;
+                userInfo.withdrawableBalance = Math.min(
+                    remoteData.withdrawableBalance || userInfo.withdrawableBalance, 
+                    userInfo.balance
+                );
+                userInfo.referralEarnings = remoteData.referralEarnings || userInfo.referralEarnings;
+                userInfo.hasUsedReferral = remoteData.hasUsedReferral || userInfo.hasUsedReferral;
+                userInfo.referredVia = remoteData.referredVia || userInfo.referredVia;
+                
+                // Merge referral history (combine arrays and remove duplicates)
+                const remoteHistory = remoteData.referralHistory || [];
+                userInfo.referralHistory = [...new Set([...userInfo.referralHistory, ...remoteHistory])];
+                
+                // Merge earned from referrals (combine arrays and remove duplicates)
+                const remoteEarnings = remoteData.earningsFromRefs || [];
+                userInfo.earningsFromRefs = [...new Set([...userInfo.earningsFromRefs, ...remoteEarnings])];
+                
+                // Save merged data back to localStorage
+                localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+            } else {
+                // No Firebase data exists yet, push our local data
+                userRefPath.set(userInfo);
+            }
+            
+            refreshUI();
+        }).catch((error) => {
+            console.log("Firebase read failed:", error);
+        });
+
+        // Listen for new referral earnings in realtime
+        userRefPath.child('earningsFromRefs').on('child_added', (dataSnapshot) => {
+            const newReward = dataSnapshot.val();
+            if (!userInfo.earningsFromRefs.includes(newReward)) {
+                userInfo.earningsFromRefs.push(newReward);
+                userInfo.balance += appSettings.referralReward;
+                userInfo.withdrawableBalance += appSettings.referralReward; // Add to withdrawable balance
+                userInfo.referralEarnings += appSettings.referralReward;
+                localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+                
+                // Show notification if the app is in foreground
+                if (document.visibilityState === 'visible') {
+                    referralRedeemedModal.show();
+                }
+                
+                refreshUI();
+            }
+        });
+    }
+
+    // NEW FUNCTION: Listen for balance updates from withdrawal page
+    function setupBalanceListener() {
+        if (!firebaseReady || !userInfo.uirefercode) return;
+        
+        firebaseDB.ref('appUsers/' + userInfo.uirefercode).on('value', (snapshot) => {
+            const remoteData = snapshot.val();
+            if (remoteData) {
+                // Update local balances from Firebase
+                userInfo.balance = remoteData.balance || userInfo.balance;
+                userInfo.withdrawableBalance = remoteData.withdrawableBalance || userInfo.withdrawableBalance;
+                
+                // Save to localStorage
+                localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+                
+                // Refresh UI
+                refreshUI();
+            }
+        });
+    }
+
+    // ====================== REFERRAL FUNCTIONS ====================== //
+    function processReferralCode() {
+        const referralInput = document.getElementById('referral-code-entry').value.trim();
+        
+        // Validate input
+        if (!referralInput || referralInput.length !== 10 || !/^\d+$/.test(referralInput)) {
+            displayAlert('referral-alert', 'Please enter a valid 10-digit referral code');
+            return;
+        }
+        
+        // Check if user is trying to use their own code
+        if (referralInput === userInfo.uirefercode) {
+            displayAlert('referral-alert', 'You cannot use your own referral code');
+            return;
+        }
+        
+        // Check if user has already used a referral code
+        if (userInfo.hasUsedReferral) {
+            displayAlert('referral-alert', 'You have already used a referral code');
+            return;
+        }
+        
+        // Check if the referral code exists in Firebase
+        if (firebaseReady) {
+            firebaseDB.ref('appUsers/' + referralInput).once('value').then((dataSnapshot) => {
+                if (dataSnapshot.exists()) {
+                    // Referral code is valid
+                    handleValidReferral(referralInput);
+                } else {
+                    displayAlert('referral-alert', 'The referral code does not exist');
+                }
+            }).catch((error) => {
+                console.log("Firebase referral check error:", error);
+                displayAlert('referral-alert', 'Error verifying referral code. Please try again later.');
+            });
+        } else {
+            // Firebase not available, we'll have to trust the client (not ideal)
+            displayAlert('referral-alert', 'Network error. Please connect to the internet to use a referral code.');
+        }
+    }
+
+    function handleValidReferral(validReferralCode) {
+        // Update local user data
+        userInfo.balance += appSettings.referralReward;
+        userInfo.withdrawableBalance += appSettings.referralReward; // Add to withdrawable balance
+        userInfo.hasUsedReferral = true;
+        userInfo.referredVia = validReferralCode;
+        userInfo.referralHistory.push({
+            code: validReferralCode,
+            date: new Date().toISOString(),
+            amount: appSettings.referralReward
+        });
+        
+        localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+        
+        // Update UI
+        refreshUI();
+        document.getElementById('referral-entry-section').classList.add('d-none');
+        rewardModal.show();
+        
+        // Update referee's data in Firebase
+        if (firebaseReady) {
+            const updateData = {};
+            updateData['appUsers/' + userInfo.uirefercode] = userInfo;
+            
+            // Add bonus to referee
+            const refereeRewardPath = `appUsers/${validReferralCode}/earningsFromRefs/${Date.now()}`;
+            updateData[refereeRewardPath] = userInfo.uirefercode;
+            
+            // Update both user and referee in a single transaction
+            firebaseDB.ref().update(updateData).catch((error) => {
+                console.log("Firebase update error:", error);
+                // Queue for later sync
+                queueFirebaseUpdate(updateData);
+            });
+        }
+    }
+
+    // Queue updates when offline
+    let queuedUpdates = [];
+    function queueFirebaseUpdate(updateData) {
+        queuedUpdates.push(updateData);
+        localStorage.setItem('queuedFirebaseUpdates', JSON.stringify(queuedUpdates));
+    }
+
+    function processQueuedUpdates() {
+        if (!firebaseReady || queuedUpdates.length === 0) return;
+        
+        const updates = queuedUpdates.shift();
+        firebaseDB.ref().update(updates)
+            .then(() => {
+                localStorage.setItem('queuedFirebaseUpdates', JSON.stringify(queuedUpdates));
+                if (queuedUpdates.length > 0) {
+                    processQueuedUpdates();
+                }
+            })
+            .catch((error) => {
+                console.log("Pending update failed:", error);
+                queuedUpdates.unshift(updates); // Put it back if failed
+                localStorage.setItem('queuedFirebaseUpdates', JSON.stringify(queuedUpdates));
+            });
+    }
+
+    // ====================== UI FUNCTIONS ====================== //
+    function refreshUI() {
+        // Update balance displays
+        document.getElementById('current-balance').textContent = formatCurrency(userInfo.balance);
+        document.getElementById('available-balance').textContent = formatCurrency(userInfo.withdrawableBalance);
+        document.getElementById('total-referral-earnings').textContent = formatCurrency(userInfo.referralEarnings);
+        
+        // Update referral code display
+        document.getElementById('user-referral-code').textContent = userInfo.uirefercode || 'Not generated';
+        
+        // Update app link with referral code
+        document.getElementById('app-link').value = getAppLinkWithReferral();
+        
+        // Hide referral input if already used
+        if (userInfo.hasUsedReferral) {
+            document.getElementById('referral-entry-section').classList.add('d-none');
+        }
+        
+        // Update referral history
+        updateReferralHistoryDisplay();
+    }
+
+    function updateReferralHistoryDisplay() {
+        const historyBox = document.getElementById('referral-activity');
+        
+        if (userInfo.referralHistory.length === 0 && userInfo.earningsFromRefs.length === 0) {
+            historyBox.innerHTML = `
+                <div class="text-center py-3 text-muted">
+                    <i class="fas fa-history fa-2x mb-2"></i>
+                    <p>No referral activity yet</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let historyContent = '<div class="list-group">';
+        
+        // Add referrals you've made (if any)
+        if (userInfo.referralHistory.length > 0) {
+            // Create a Set to track unique referral codes we've already displayed
+            const displayedCodes = new Set();
+            
+            historyContent += `
+                <div class="list-group-item border-0">
+                    <h6 class="mb-3"><i class="fas fa-share-alt me-2"></i>You have been Invited by</h6>
+            `;
+            
+            // Only show each referral code once
+            userInfo.referralHistory.forEach(ref => {
+                if (!displayedCodes.has(ref.code)) {
+                    displayedCodes.add(ref.code);
+                    historyContent += `
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="badge bg-light text-dark me-2">${ref.code} invitee</span>
+                                <small class="text-muted">${new Date(ref.date).toLocaleDateString()}</small>
+                            </div>
+                            <span class="badge badge-success">+₹${ref.amount}</span>
+                        </div>
+                    `;
+                }
+            });
+            
+            historyContent += `</div>`;
+        }
+        
+        // Add referrals you've earned from (if any)
+        if (userInfo.earningsFromRefs.length > 0) {
+            // Create a Set to track unique referral codes we've already displayed
+            const displayedEarnings = new Set();
+            
+            historyContent += `
+                <div class="list-group-item border-0">
+                    <h6 class="mb-3"><i class="fas fa-hand-holding-usd me-2"></i>You successfully invited</h6>
+            `;
+            
+            // Only show each earning once
+            userInfo.earningsFromRefs.forEach(refCode => {
+                if (!displayedEarnings.has(refCode)) {
+                    displayedEarnings.add(refCode);
+                    historyContent += `
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="badge bg-light text-dark me-2">invited user ${refCode}</span>
+                            </div>
+                            <span class="badge badge-success">+₹${appSettings.referralReward}</span>
+                        </div>
+                    `;
+                }
+            });
+            
+            historyContent += `</div>`;
+        }
+        
+        historyContent += '</div>';
+        historyBox.innerHTML = historyContent;
+    }
+
+    // ====================== COPY FUNCTIONS ====================== //
+    async function copyToClipboard(text, buttonId) {
+        try {
+            // Modern clipboard API (most browsers)
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(text);
+                updateButtonUI(buttonId, true);
+                return;
+            }
+            
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';  // Prevent scrolling to bottom
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    updateButtonUI(buttonId, true);
+                } else {
+                    throw new Error('Copy command failed');
+                }
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        } catch (err) {
+            console.error('Failed to copy:', err);
+            // Fallback: Show the text for manual copy
+            alert(`Please copy this manually: ${text}`);
+        }
+    }
+
+    function updateButtonUI(buttonId, isSuccess) {
+        const button = document.getElementById(buttonId);
+        if (!button) return;
+        
+        const originalHtml = button.innerHTML;
+        button.innerHTML = isSuccess 
+            ? '<i class="fas fa-check me-1"></i>Copied!'
+            : '<i class="fas fa-copy me-1"></i>Copy';
+        
+        if (isSuccess) {
+            button.classList.add('btn-success');
+            button.classList.remove('btn-primary');
+            setTimeout(() => {
+                button.innerHTML = originalHtml;
+                button.classList.remove('btn-success');
+                button.classList.add('btn-primary');
+            }, 2000);
+        }
+    }
+
+    // ====================== EVENT LISTENERS ====================== //
+    document.getElementById('copy-referral-button').addEventListener('click', () => {
+        if (!userInfo.uirefercode) return;
+        copyToClipboard(userInfo.uirefercode, 'copy-referral-button');
+    });
+
+    document.getElementById('copy-app-button').addEventListener('click', () => {
+        copyToClipboard(getAppLinkWithReferral(), 'copy-app-button');
+    });
+        
+    document.getElementById('share-whatsapp-button').addEventListener('click', () => {
+        const shareMessage = `Join me using my referral code ${userInfo.uirefercode} and earn ₹25! Download the app here: ${getAppLinkWithReferral()}`;
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+        window.open(whatsappUrl, '_blank');
+    });
+
+    document.getElementById('submit-referral-button').addEventListener('click', processReferralCode);
+
+    // ====================== INITIAL SETUP ====================== //
+    // Load pending updates from localStorage
+    queuedUpdates = JSON.parse(localStorage.getItem('queuedFirebaseUpdates')) || [];
+    
+    // Initialize user ID if not exists
+    if (!userInfo.uirefercode) {
+        userInfo.uirefercode = createUserReferCode();
+        localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+    }
+    
+    // Initialize Firebase sync
+    setupFirebaseSync();
+    setupBalanceListener(); // NEW: Add balance listener
+    
+    // Update UI with initial data
+    refreshUI();
+    
+    // Process any pending updates when coming online
+    window.addEventListener('online', () => {
+        if (!firebaseReady && firebase.apps.length === 0) {
+            try {
+                firebase.initializeApp(firebaseSettings);
+                firebaseDB = firebase.database();
+                firebaseReady = true;
+                setupFirebaseSync();
+                setupBalanceListener(); // NEW: Add balance listener
+                processQueuedUpdates();
+            } catch (e) {
+                console.log("Firebase re-initialization error", e);
+            }
+        } else if (firebaseReady) {
+            processQueuedUpdates();
+        }
+    });
+</script>
+</body>
+</body>
+</html>
