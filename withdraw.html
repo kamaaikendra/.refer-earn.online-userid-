@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Earnings</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghyphenhyphentaINONB7Sy4wj9Pawn8NAxU9Mapewhubm58MKvKj6wmM5RBMwM64hwNAbtpV-sn4LuPtLT86GmLFX94097Wwe7Fmn2kF_5jWO8jkKzha8nSCIYnzwvEY7F3wIxMibUORGS39YZV6vhyphenhyphenaPOwGjmnQyv0UGptO9HYi5NqAe2UMtCT9eLRPnvfQCBv6qY/s16000/1000096137.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+        }
+        .card {
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border:1px solid green;
+            background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilBBCE0Ee_NIgBZeWSBsF56-O9pmEDAA-mBM7m1xQ4tJBlDKM2Khajkr8nVsVd34o6hdkUXLbtGRsHHFnwU8du0V-iPOCOLh2Yg1P2nq_HNIHgntPcMwx9Att8n-akCifgkOO0XdUd5MWXUm7pNApUfBKReyQy_nMbCMjGAS0JvaCKhNczaRzEW4_IZZE/w640-h202/1000097088.webp');
+            background-size: 100% 100%;
+        }
+        .balance-card {
+            background:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYn4N8Oq8JKuOZJFSAHyKs7dTwyr9q_djpo8i3Im5n5P4QsUDuUq7XS0dFBXKMFKhfTLvq6P2kBrSAkXRwHlVobYJ_cIU-Go9OR95hJgBX3p66DTxZwGY0OYa3SSyQ4hwdBv2O0c-H4liu7x1Qx8FQX3TlemCgr74Qyggb8mwZeE0Bi7PJN24VUoUs5Jo/s16000/1000097114.png');
+            background-size: 100% 100%;
+            color: white;
+            border:none;
+            filter: drop-shadow(0 0 1px #FFA500) 
+        drop-shadow(0 0 1px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .withdraw-card {
+            background:url('https://images.unsplash.com/photo-1663517768994-a65e6ab3a40a?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aGVybyUyMGltYWdlfGVufDB8fDB8fHww');
+            background-size:100% 100%;
+            color:white;
+            box-shadow: inset 0 0 5px #FFA500, 
+            inset 0 0 5px rgba(255, 165, 0, 0.99);
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .history-card {
+            background:url('https://images.unsplash.com/photo-1678203699263-917199c725b2?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVybyUyMGltYWdlfGVufDB8fDB8fHww');
+            background-size:100% 100%;
+            box-shadow: inset 0 0 5px #FFA500, 
+            inset 0 0 10px rgba(255, 165, 0, 0.99);
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .btn-primary {
+            background: linear-gradient(160deg, #000000, #333333,#000000, #333333,#000000, #333333,#000000, #333333,#000000, #333333,#000000,#333333,#000000);
+            background-size:100% 100%;
+            border:2px solid  #333333;
+            border-radius: 50px;
+            padding: 8px 20px;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+        .status-pending {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        .status-approved {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .status-rejected {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .status-processing {
+            color: #17a2b8;
+            font-weight: bold;
+        }
+        .withdraw-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .head{
+            font-size: 1rem;
+            color:white;
+            font-weight: 900;
+        }
+        .form-text{
+            color:#EBF4FA;
+        }
+        .balance-amount{
+            color:#00FF00;
+            font-weight: 900;
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 0.5px #FFA500) 
+        drop-shadow(0 0 0.5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .total-head{
+            color:#57FEFF;
+            font-size:1em;
+            font-weight: 900;
+            filter: drop-shadow(0 0 0.2px #FFA500) 
+        drop-shadow(0 0 0.2px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .total-amount{
+            color:#DAEE01;
+            font-weight: 900;
+            font-size: 1rem;
+            filter: drop-shadow(0 0 0.5px #FFA500) 
+        drop-shadow(0 0 0.5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .blue-text{
+            color:#43C6DB;
+            font-weight: 900;
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 0.5px #FFA500) 
+        drop-shadow(0 0 0.5px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .text-small{
+            color:#50EBEC;
+            font-size:1em;
+            filter: drop-shadow(0 0 0.2px #FFA500) 
+        drop-shadow(0 0 0.2px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        .black-headings{
+            color:black;
+            font-weight: 900;
+            font-size:2em;
+            filter: drop-shadow(0 0 1px #FFA500) 
+        drop-shadow(0 0 1px rgba(255, 165, 0, 0.99));
+transition: transform 0.01s ease-out;
+pointer-events: auto;
+        }
+        #backButton {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            padding: 5px 10px;
+            color: white;
+            background:none;
+            border:none;
+            font-weight: 900;
+        }
+        #backButton:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            border-radius: 8px;
+        }
+        /* Desktop Auto Adjustment Styles */
+@media (min-width: 992px) {
+    body {
+        background-size: cover;
+        background-attachment: fixed;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .container {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        max-width: 95%;
+    }
+    
+    .card {
+        margin-bottom: 1.5rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .balance-card {
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+    
+    .withdraw-card {
+        max-width: 700px;
+        margin: 0 auto 2rem;
+    }
+    
+    .history-card {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .withdraw-form {
+        padding: 2rem;
+    }
+    
+    /* Typography Scaling */
+    .head {
+        font-size: 1.3rem;
+    }
+    
+    .balance-amount {
+        font-size: 2.5rem;
+    }
+    
+    .total-head {
+        font-size: 1.3em;
+    }
+    
+    .total-amount {
+        font-size: 1.5rem;
+    }
+    
+    .blue-text {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .black-headings {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .text-small {
+        font-size: 1.1em;
+    }
+    
+    /* Button Adjustments */
+    .btn-primary, 
+    .btn-success, 
+    .btn-danger {
+        padding: 12px 30px;
+        font-size: 1.1rem;
+    }
+    
+    /* Form Elements */
+    .form-control {
+        padding: 12px 15px;
+        font-size: 1.1rem;
+    }
+    
+    .form-text {
+        font-size: 0.95rem;
+    }
+    
+    /* Back Button */
+    #backButton {
+        font-size: 1.3rem;
+        padding: 10px 20px;
+        top: 20px;
+        left: 20px;
+    }
+    
+    /* Card Content Spacing */
+    .card-body {
+        padding: 2rem;
+    }
+    
+    /* History Items */
+    .list-group-item {
+        padding: 1.2rem 1.5rem;
+    }
+}
+
+/* Large Desktop Screens (1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .balance-card {
+        max-width: 850px;
+    }
+    
+    .withdraw-card {
+        max-width: 750px;
+    }
+    
+    .history-card {
+        max-width: 950px;
+    }
+    
+    .black-headings {
+        font-size: 2.5rem;
+    }
+    
+    .balance-amount {
+        font-size: 3rem;
+    }
+}
+
+/* Extra Large Screens (1400px and up) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .card {
+        margin-bottom: 2rem;
+    }
+    
+    .balance-card {
+        max-width: 900px;
+    }
+    
+    .withdraw-card {
+        max-width: 800px;
+    }
+    
+    .history-card {
+        max-width: 1000px;
+    }
+    
+    .card-body {
+        padding: 2.5rem;
+    }
+    
+    .black-headings {
+        font-size: 2.8rem;
+    }
+    
+    .blue-text {
+        font-size: 2.2rem;
+    }
+}
+
+/* Ultra Wide Screens (1920px and up) */
+@media (min-width: 1920px) {
+    body {
+        background-size: 100% 100%;
+    }
+    
+    .container {
+        max-width: 1600px;
+    }
+    
+    .card {
+        margin-bottom: 2.5rem;
+    }
+    
+    .card-body {
+        padding: 3rem;
+    }
+    
+    .black-headings {
+        font-size: 3rem;
+    }
+    
+    .balance-amount {
+        font-size: 3.5rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <!-- Balance Card -->
+        <div class="card balance-card mb-4">
+            <div class="card-body text-center">
+                <div class="blue-text"><i class="fas fa-wallet me-2"></i>available Balance</div>
+                <div>
+                        <div class="balance-amount">₹<span id="available-balance">0</span></div>
+                    </div>
+                <div class="text-small">Rebate rate upto <span id="current-balance">0</span>% in 1000% max</div>
+                    <div>
+                        <div class="total-head">Total Withdrawn</div>
+                        <div class="total-amount">₹<span id="total-withdrawn">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdraw Form Card -->
+        <div class="card withdraw-card mb-4">
+            <div class="card-body">
+                <div class="black-headings"><i class="fas fa-coins me-2"></i>Withdraw Funds</div>
+                
+                <div class="withdraw-form">
+                    <div class="mb-3">
+                        <label for="withdraw-amount" class="form-label">Amount to Withdraw (₹)</label>
+                        <input type="number" class="form-control" id="withdraw-amount" placeholder="Enter amount" min="100">
+                        <div class="form-text">Minimum withdrawal amount: ₹100</div>
+                    </div>
+                    
+                    <div class="alert alert-danger d-none" id="withdraw-alert"></div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button class="btn btn-primary" id="submit-withdraw">
+                            <i class="fas fa-paper-plane me-1"></i> Submit Withdrawal Request
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdrawal History -->
+        <div class="card history-card">
+            <div class="card-body">
+                <div class="black-headings"><i class="fas fa-history me-2"></i>Withdrawal History</div>
+                <div id="withdrawal-history">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="backButton" onclick="window.history.back()">
+        <i class="fas fa-arrow-left me-1"></i></button>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-success"><i class="fas fa-check-circle me-2"></i>Success!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-rupee-sign text-success mb-3" style="font-size: 3rem;"></i>
+                    <h4>Withdrawal Request Submitted!</h4>
+                    <p>Your request for ₹<span id="modal-withdraw-amount">0</span> has been received.</p>
+                    <p>Order ID: <span id="modal-order-id" class="fw-bold">N/A</span></p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+    // ====================== CONFIGURATION ====================== //
+    // Firebase configuration - same as your refer and earn page
+    const firebaseSettings = {
+        apiKey: "AIzaSyCb-qi3uLhWVRip4eZY_bwq1zkgJjXiT-k",
+        authDomain: "fbase-for-refer-and-earn-page.firebaseapp.com",
+        databaseURL: "https://fbase-for-refer-and-earn-page-default-rtdb.firebaseio.com",
+        projectId: "fbase-for-refer-and-earn-page",
+        storageBucket: "fbase-for-refer-and-earn-page.appspot.com",
+        messagingSenderId: "546476818185",
+        appId: "1:546476818185:web:6154884da5ed6a61459dd8"
+    };
+
+    // App configuration
+    const appSettings = {
+        minWithdrawalAmount: 100, // Minimum withdrawal amount
+        withdrawalProcessingFee: 0 // Optional processing fee (set to 0 for now)
+    };
+
+    // ====================== INITIALIZATION ====================== //
+    // Initialize Firebase
+    let firebaseReady = false;
+    let firebaseDB;
+    try {
+        firebase.initializeApp(firebaseSettings);
+        firebaseDB = firebase.database();
+        firebaseReady = true;
+        console.log("Firebase initialized successfully");
+    } catch (e) {
+        console.log("Firebase initialization error", e);
+        firebaseReady = false;
+    }
+
+    // Initialize modal
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+
+    // Load user data from localStorage
+    let userInfo = JSON.parse(localStorage.getItem('userInfoData')) || {
+        balance: 0,
+        withdrawableBalance: 0,
+        referralEarnings: 0,
+        uirefercode: null,
+        withdrawalHistory: []
+    };
+
+    // ====================== UTILITY FUNCTIONS ====================== //
+    // Format money
+    function formatCurrency(amount) {
+        return amount.toFixed(2);
+    }
+
+    // Show alert
+    function displayAlert(alertElementId, message, isError = true) {
+        const alertBox = document.getElementById(alertElementId);
+        alertBox.textContent = message;
+        alertBox.classList.remove('d-none', 'alert-success', 'alert-danger');
+        alertBox.classList.add(isError ? 'alert-danger' : 'alert-success');
+        setTimeout(() => {
+            alertBox.classList.add('d-none');
+        }, 5000);
+    }
+
+    // Generate a 6-8 digit random order ID
+    function generateOrderId() {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    // Get current timestamp
+    function getCurrentTimestamp() {
+        return new Date().toISOString();
+    }
+
+    // Format date for display
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+
+    // Get status badge class
+    function getStatusClass(status) {
+        switch(status.toLowerCase()) {
+            case 'pending': return 'status-pending';
+            case 'approved': return 'status-approved';
+            case 'rejected': return 'status-rejected';
+            case 'processing': return 'status-processing';
+            default: return '';
+        }
+    }
+
+    // ====================== WITHDRAWAL FUNCTIONS ====================== //
+    function submitWithdrawalRequest() {
+        const amountInput = document.getElementById('withdraw-amount');
+        const amount = parseFloat(amountInput.value);
+        
+        // Validate input
+        if (isNaN(amount) || amount < appSettings.minWithdrawalAmount || amount % 100 !== 0) {
+            displayAlert('withdraw-alert', `Withdrawal amount must be in multiples of ₹100 (e.g., 100, 200, 300)`);
+            return;
+        }
+        
+        if (amount > userInfo.withdrawableBalance) {
+            displayAlert('withdraw-alert', 'Insufficient withdrawable balance');
+            return;
+        }
+        
+        // Generate order ID
+        const orderId = generateOrderId();
+        const timestamp = getCurrentTimestamp();
+        
+        // Create withdrawal request object
+        const withdrawalRequest = {
+            orderId: orderId,
+            uid: userInfo.uirefercode,
+            amount: amount,
+            status: 'pending',
+            timestamp: timestamp,
+            updatedAt: timestamp
+        };
+        
+        // Update local user data (deduct amount immediately)
+        userInfo.balance -= amount;
+        userInfo.withdrawableBalance -= amount;
+        
+        // Add to withdrawal history
+        if (!userInfo.withdrawalHistory) {
+            userInfo.withdrawalHistory = [];
+        }
+        userInfo.withdrawalHistory.unshift(withdrawalRequest);
+        
+        // Save to localStorage
+        localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+        
+        // Update UI
+        refreshUI();
+        
+        // Show success modal
+        document.getElementById('modal-withdraw-amount').textContent = formatCurrency(amount);
+        document.getElementById('modal-order-id').textContent = orderId;
+        successModal.show();
+        
+        // Submit to Firebase if available
+        if (firebaseReady) {
+            const withdrawalRef = firebaseDB.ref('withdrawals/' + orderId);
+            
+            // First set the withdrawal request
+            withdrawalRef.set(withdrawalRequest)
+                .then(() => {
+                    // Then update user balance in Firebase
+                    const userRef = firebaseDB.ref('appUsers/' + userInfo.uirefercode);
+                    userRef.update({
+                        balance: userInfo.balance,
+                        withdrawableBalance: userInfo.withdrawableBalance
+                    }).catch(error => {
+                        console.log("Failed to update user balance in Firebase:", error);
+                    });
+                })
+                .catch(error => {
+                    console.log("Failed to submit withdrawal to Firebase:", error);
+                    // Queue for later sync
+                    queueWithdrawalRequest(withdrawalRequest);
+                });
+        }
+    }
+
+    // Queue withdrawal requests when offline
+    let queuedWithdrawals = [];
+    function queueWithdrawalRequest(withdrawalRequest) {
+        queuedWithdrawals.push(withdrawalRequest);
+        localStorage.setItem('queuedWithdrawals', JSON.stringify(queuedWithdrawals));
+    }
+
+    function processQueuedWithdrawals() {
+        if (!firebaseReady || queuedWithdrawals.length === 0) return;
+        
+        const withdrawal = queuedWithdrawals.shift();
+        const withdrawalRef = firebaseDB.ref('withdrawals/' + withdrawal.orderId);
+        
+        withdrawalRef.set(withdrawal)
+            .then(() => {
+                localStorage.setItem('queuedWithdrawals', JSON.stringify(queuedWithdrawals));
+                if (queuedWithdrawals.length > 0) {
+                    processQueuedWithdrawals();
+                }
+            })
+            .catch(error => {
+                console.log("Pending withdrawal failed:", error);
+                queuedWithdrawals.unshift(withdrawal); // Put it back if failed
+                localStorage.setItem('queuedWithdrawals', JSON.stringify(queuedWithdrawals));
+            });
+    }
+
+    // ====================== WITHDRAWAL HISTORY FUNCTIONS ====================== //
+    function setupWithdrawalHistoryListener() {
+        if (!firebaseReady || !userInfo.uirefercode) return;
+        
+        // Listen for status updates on our withdrawals
+        firebaseDB.ref('withdrawals').orderByChild('uid').equalTo(userInfo.uirefercode).on('child_changed', (snapshot) => {
+            const updatedWithdrawal = snapshot.val();
+            
+            // Find and update the corresponding withdrawal in local history
+            if (userInfo.withdrawalHistory) {
+                const index = userInfo.withdrawalHistory.findIndex(w => w.orderId === updatedWithdrawal.orderId);
+                if (index !== -1) {
+                    userInfo.withdrawalHistory[index] = updatedWithdrawal;
+                    localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+                    updateWithdrawalHistoryDisplay();
+                }
+            }
+        });
+    }
+
+    // ====================== UI FUNCTIONS ====================== //
+    function refreshUI() {
+        // Update balance displays
+        document.getElementById('current-balance').textContent = formatCurrency(userInfo.balance);
+        document.getElementById('available-balance').textContent = formatCurrency(userInfo.withdrawableBalance);
+        
+        // Calculate total withdrawn
+        let totalWithdrawn = 0;
+        if (userInfo.withdrawalHistory) {
+            totalWithdrawn = userInfo.withdrawalHistory.reduce((sum, withdrawal) => {
+                return sum + (withdrawal.status === 'approved' ? withdrawal.amount : 0);
+            }, 0);
+        }
+        document.getElementById('total-withdrawn').textContent = formatCurrency(totalWithdrawn);
+        
+        // Update withdrawal history
+        updateWithdrawalHistoryDisplay();
+    }
+
+    function updateWithdrawalHistoryDisplay() {
+        const historyBox = document.getElementById('withdrawal-history');
+        
+        if (!userInfo.withdrawalHistory || userInfo.withdrawalHistory.length === 0) {
+            historyBox.innerHTML = `
+                <div class="text-center py-3 text-muted">
+                    <i class="fas fa-history fa-2x mb-2"></i>
+                    <p>No withdrawal history yet</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let historyContent = '<div class="list-group">';
+        
+        userInfo.withdrawalHistory.forEach(withdrawal => {
+            historyContent += `
+                <div class="list-group-item border-0">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <div>
+                            <span class="fw-bold">Order #${withdrawal.orderId}</span>
+                            <small class="text-muted ms-2">${formatDate(withdrawal.timestamp)}</small>
+                        </div>
+                        <span class="fw-bold">₹${formatCurrency(withdrawal.amount)}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Status</small>
+                        <span class="${getStatusClass(withdrawal.status)}">
+                            ${withdrawal.status.charAt(0).toUpperCase() + withdrawal.status.slice(1)}
+                        </span>
+                    </div>
+                </div>
+                <hr class="my-2">
+            `;
+        });
+        
+        historyContent += '</div>';
+        historyBox.innerHTML = historyContent;
+    }
+
+    // ====================== EVENT LISTENERS ====================== //
+    document.getElementById('submit-withdraw').addEventListener('click', submitWithdrawalRequest);
+
+    // ====================== INITIAL SETUP ====================== //
+    // Load pending withdrawals from localStorage
+    queuedWithdrawals = JSON.parse(localStorage.getItem('queuedWithdrawals')) || [];
+    
+    // Initialize Firebase sync
+    if (firebaseReady) {
+        setupWithdrawalHistoryListener();
+        
+        // Load any existing withdrawals from Firebase
+        if (userInfo.uirefercode) {
+            firebaseDB.ref('withdrawals').orderByChild('uid').equalTo(userInfo.uirefercode).once('value')
+                .then(snapshot => {
+                    const withdrawals = [];
+                    snapshot.forEach(childSnapshot => {
+                        withdrawals.push(childSnapshot.val());
+                    });
+                    
+                    // Merge with local withdrawals (prioritizing Firebase data)
+                    if (withdrawals.length > 0) {
+                        if (!userInfo.withdrawalHistory) {
+                            userInfo.withdrawalHistory = withdrawals;
+                        } else {
+                            // Create a map of order IDs to withdrawals for quick lookup
+                            const withdrawalMap = new Map();
+                            userInfo.withdrawalHistory.forEach(w => withdrawalMap.set(w.orderId, w));
+                            
+                            // Update or add withdrawals from Firebase
+                            withdrawals.forEach(fbWithdrawal => {
+                                const localWithdrawal = withdrawalMap.get(fbWithdrawal.orderId);
+                                if (localWithdrawal) {
+                                    // Update status if different
+                                    if (localWithdrawal.status !== fbWithdrawal.status) {
+                                        localWithdrawal.status = fbWithdrawal.status;
+                                        localWithdrawal.updatedAt = fbWithdrawal.updatedAt;
+                                    }
+                                } else {
+                                    // Add new withdrawal from Firebase
+                                    userInfo.withdrawalHistory.push(fbWithdrawal);
+                                }
+                            });
+                        }
+                        
+                        // Save merged data
+                        localStorage.setItem('userInfoData', JSON.stringify(userInfo));
+                    }
+                    
+                    refreshUI();
+                })
+                .catch(error => {
+                    console.log("Failed to load withdrawals from Firebase:", error);
+                    refreshUI();
+                });
+        }
+    }
+    
+    // Update UI with initial data
+    refreshUI();
+    
+    // Process any pending withdrawals when coming online
+    window.addEventListener('online', () => {
+        if (!firebaseReady && firebase.apps.length === 0) {
+            try {
+                firebase.initializeApp(firebaseSettings);
+                firebaseDB = firebase.database();
+                firebaseReady = true;
+                setupWithdrawalHistoryListener();
+                processQueuedWithdrawals();
+            } catch (e) {
+                console.log("Firebase re-initialization error", e);
+            }
+        } else if (firebaseReady) {
+            processQueuedWithdrawals();
+        }
+    });
+</script>
+</body>
+</html>
